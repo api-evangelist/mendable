@@ -1,0 +1,68 @@
+aid: mendable
+name: Mendable
+review:
+  question: Does Mendable expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Per API Evangelist scope, HTTP Server-Sent Events (SSE) is in-scope for
+    AsyncAPI modeling. Mendable's mendableChat endpoint streams answers as
+    data-only SSE chunks (<|source|>, text, <|message_id|>) over the same
+    REST endpoint when shouldStream is true (the default). The SSE stream is
+    documented inline in the OpenAPI text/event-stream response for
+    /mendableChat rather than as a standalone AsyncAPI document. No WebSocket
+    surface was modeled because none is documented.
+findings:
+  summary: |
+    Mendable does not publish a documented public WebSocket API. The Mendable
+    platform exposes only REST (HTTPS) endpoints under
+    https://api.mendable.ai/v1, authenticated with an api_key supplied in the
+    JSON request body (also accepted as a Bearer token). Streaming for chat
+    answers is delivered as HTTP Server-Sent Events (SSE) via the default
+    shouldStream behavior on the mendableChat REST endpoint; SSE is a one-way
+    HTTP streaming transport and is not WebSocket. No realtime, bidirectional
+    WebSocket (ws:// or wss://) endpoint is documented for chat, ingestion, or
+    any other product surface.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.mendable.ai/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events delivered over the mendableChat REST endpoint when shouldStream is true (default). Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Mendable's API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.mendable.ai/v1/newConversation
+    - POST https://api.mendable.ai/v1/mendableChat
+    - POST https://api.mendable.ai/v1/ingestData
+    - POST https://api.mendable.ai/v1/ingestDocuments
+    - POST https://api.mendable.ai/v1/ingestionStatus
+    - POST https://api.mendable.ai/v1/rateMessage
+sources:
+  - url: https://docs.mendable.ai/mendable-api/overview
+    type: APIReference
+    note: Overview lists the REST API surface; all endpoints are HTTPS POST.
+  - url: https://docs.mendable.ai/mendable-api/chat
+    type: Documentation
+    note: Chat streams data-only Server-Sent Events over HTTPS when shouldStream is true; not WebSocket.
+  - url: https://docs.mendable.ai/mendable-api/conversation
+    type: Documentation
+    note: newConversation is a POST returning a conversation_id.
+  - url: https://docs.mendable.ai/mendable-api/ingestion
+    type: Documentation
+    note: Ingestion endpoints are HTTPS POST returning a task_id.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The chat SSE stream is documented
+    inline in the OpenAPI text/event-stream response for /mendableChat so SSE
+    is never misrepresented as WebSocket; a standalone AsyncAPI document was
+    not authored for this single one-way stream.

@@ -1,0 +1,121 @@
+aid: mendable
+url: https://raw.githubusercontent.com/api-evangelist/mendable/refs/heads/main/apis.yml
+name: Mendable
+kind: company
+description: Mendable is an AI answers and enterprise search platform that lets teams
+  ingest their documentation, websites, and knowledge sources and serve grounded,
+  cited AI chat answers over them. Built by the Firecrawl / Mendable team, it exposes
+  a REST API at https://api.mendable.ai/v1 for creating conversations, asking
+  questions over ingested content with streaming, ingesting and managing data
+  sources, and rating answers.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Answers
+- Enterprise Search
+- RAG
+- Support
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: mendable:mendable-chat-answers-api
+  name: Mendable Chat & Answers API
+  tags:
+  - Chat
+  - Answers
+  - RAG
+  - Streaming
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.mendable.ai/mendable-api/chat
+  baseURL: https://api.mendable.ai/v1
+  properties:
+  - url: https://docs.mendable.ai/mendable-api/chat
+    type: Documentation
+  - url: https://docs.mendable.ai/mendable-api/overview
+    type: APIReference
+  - url: openapi/mendable-openapi.yml
+    type: OpenAPI
+  - url: collections/mendable.postman_collection.json
+    type: PostmanCollection
+  description: Ask natural-language questions over ingested documentation and knowledge
+    sources via the mendableChat endpoint, returning grounded answers with citations.
+    Supports Server-Sent Events streaming, conversation history, retriever options,
+    metadata filtering, and tool calls.
+- aid: mendable:mendable-conversations-api
+  name: Mendable Conversations API
+  tags:
+  - Conversations
+  - Sessions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.mendable.ai/mendable-api/conversation
+  baseURL: https://api.mendable.ai/v1
+  properties:
+  - url: https://docs.mendable.ai/mendable-api/conversation
+    type: Documentation
+  - url: https://docs.mendable.ai/mendable-api/overview
+    type: APIReference
+  - url: openapi/mendable-openapi.yml
+    type: OpenAPI
+  - url: collections/mendable.postman_collection.json
+    type: PostmanCollection
+  description: Create a new conversation to obtain a conversation_id used to group a
+    series of chat interactions into a single grounded session.
+- aid: mendable:mendable-data-ingestion-api
+  name: Mendable Data Ingestion & Sources API
+  tags:
+  - Data Ingestion
+  - Sources
+  - Indexing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.mendable.ai/mendable-api/ingestion
+  baseURL: https://api.mendable.ai/v1
+  properties:
+  - url: https://docs.mendable.ai/mendable-api/ingestion
+    type: Documentation
+  - url: https://docs.mendable.ai/mendable-api/overview
+    type: APIReference
+  - url: openapi/mendable-openapi.yml
+    type: OpenAPI
+  - url: collections/mendable.postman_collection.json
+    type: PostmanCollection
+  description: Ingest websites, sitemaps, GitHub repos, Docusaurus sites, YouTube
+    transcripts, single URLs, and raw documents into a Mendable project, and poll
+    ingestion task status. Returns a task_id used to track indexing progress.
+- aid: mendable:mendable-ratings-api
+  name: Mendable Ratings API
+  tags:
+  - Ratings
+  - Feedback
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.mendable.ai/mendable-api/rating
+  baseURL: https://api.mendable.ai/v1
+  properties:
+  - url: https://docs.mendable.ai/mendable-api/rating
+    type: Documentation
+  - url: https://docs.mendable.ai/mendable-api/overview
+    type: APIReference
+  - url: openapi/mendable-openapi.yml
+    type: OpenAPI
+  - url: collections/mendable.postman_collection.json
+    type: PostmanCollection
+  description: Submit positive or negative ratings on individual answer messages via
+    rateMessage to feed answer-quality analytics and improvement loops.
+common:
+- type: GitHubOrganization
+  url: https://github.com/mendableai
+- type: LinkedIn
+  url: https://www.linkedin.com/company/mendable
+- type: Website
+  url: https://www.mendable.ai
+- type: Documentation
+  url: https://docs.mendable.ai
+- type: Plans
+  url: plans/mendable-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/mendable-rate-limits.yml
+- type: FinOps
+  url: finops/mendable-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

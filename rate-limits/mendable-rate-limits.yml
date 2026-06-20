@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Mendable
+providerId: mendable
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answers
+- Enterprise Search
+- RAG
+- Support
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Mendable meters API usage primarily through a monthly message-credit
+  allotment that varies by plan, where each chat answer consumes credits based
+  on the model used. Beyond the message-credit quota, Mendable does not publish
+  explicit per-second / per-minute request rate limits in its public API
+  documentation; ingestion has documented payload limits (up to 500 raw
+  documents and 2MB per ingestDocuments request). Specific request-rate values
+  are not reconciled in this artifact.
+notes: >-
+  Verify the current message-credit allotment per plan and any per-endpoint
+  request limits on reconciliation; quotas raise via Enterprise agreements.
+sources:
+- https://www.mendable.ai/pricing
+- https://docs.mendable.ai/mendable-api/ingestion
+- https://docs.mendable.ai/mendable-api/overview
+responseCodes:
+  throttled: 429
+limits:
+- name: Message Credits
+  scope: account
+  metric: messages
+  limit: see plan (500/month on Free)
+  notes: Each answer consumes credits by model; quota resets monthly and raises by plan.
+- name: ingestDocuments Document Count
+  scope: request
+  metric: documents
+  limit: 500
+  notes: Maximum raw documents per ingestDocuments request.
+- name: ingestDocuments Payload Size
+  scope: request
+  metric: bytes
+  limit: 2097152
+  notes: 2MB maximum payload per ingestDocuments request.
+- name: API Request Rate
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No explicit public per-minute request rate limit documented; not reconciled.
+policies:
+- name: Credit-Based Quota
+  description: Usage is bounded by monthly message credits rather than per-second request rates; credits vary by model.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

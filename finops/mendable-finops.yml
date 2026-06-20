@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Mendable
+providerId: mendable
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answers
+- Enterprise Search
+- RAG
+- Support
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Mendable spend. Mendable bills through a monthly message-credit
+  model where each chat answer consumes credits that vary by the underlying
+  model (for example GPT-3.5-Turbo ~1 credit, Claude ~2, GPT-4 / tool-using ~3).
+  A Free tier includes a fixed monthly credit allotment; the Enterprise tier is
+  sales-led with custom credit volumes, bring-your-own-key models, SSO, and SLA.
+  Data ingestion is included within the plan rather than separately metered.
+notes: >-
+  Per-model credit costs and the exact Free allotment are subject to change;
+  verify against the Mendable pricing page during reconciliation. Enterprise
+  pricing is contact-sales, so dollar amounts are not reconciled.
+sources:
+- https://www.mendable.ai/pricing
+- https://docs.mendable.ai/mendable-api/overview
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Mendable
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Credit-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Mendable
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Mendable
+  PublisherName: Mendable
+  InvoiceIssuerName: Mendable
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Credit-Based
+meters:
+- name: message_credits
+  description: Credits consumed per chat answer, varying by the model used to generate the answer.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - model
+- name: answers
+  description: Number of chat answers served via mendableChat.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: ingested_documents
+  description: Raw documents and crawled pages ingested into projects.
+  unit: documents
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - source_type
+principles:
+- name: Visibility
+  description: Use the Mendable analytics platform and data export to inspect message-credit burn per project.
+- name: Allocation
+  description: Separate API keys / projects per workload or team and map credit consumption to cost centers.
+- name: Optimization
+  description: Route lower-complexity questions to cheaper models (1-credit) and reserve GPT-4 / tool-using answers (3-credit) for high-value queries; tune retriever_options to control retrieval cost.
+- name: Accountability
+  description: Assign owners per project, review monthly credit consumption against the plan allotment, and upgrade only when sustained overage warrants it.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

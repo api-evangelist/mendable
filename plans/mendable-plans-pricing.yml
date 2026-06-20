@@ -1,0 +1,88 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Mendable
+providerId: mendable
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answers
+- Enterprise Search
+- RAG
+- Support
+- Plans
+description: >-
+  Mendable uses a message-credit pricing model. A Free tier includes a monthly
+  allotment of message credits with access to the pre-built components and API,
+  unlimited data sources, analytics, and data connectors. The Enterprise tier
+  is sales-led with custom pricing covering white-label components, custom and
+  bring-your-own-key models, SSO, custom data connectors, SLA, and premium
+  support. Each answer consumes message credits that vary by model (for
+  example GPT-3.5-Turbo ~1 credit, Claude ~2, GPT-4 / tool-using ~3).
+notes: >-
+  Free-tier message-credit allotment has been published at both 300 and 500
+  credits in different sources; verify the current value on the Mendable
+  pricing page. Enterprise pricing is contact-sales. Any intermediate paid
+  tier is not consistently documented; values here are not reconciled.
+sources:
+- https://www.mendable.ai/pricing
+- https://docs.mendable.ai/mendable-api/overview
+plans:
+- id: mendable-free
+  name: Free
+  type: free
+  description: >-
+    Free monthly message-credit allotment with pre-built components plus API
+    access, unlimited data sources, analytics, model customization, and data
+    connectors.
+  entries:
+  - label: Message Credits
+    name: message_credits
+    type: usage
+    metric: messages
+    limit: 500
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Pre-built Components + API
+  - name: Unlimited Data Sources
+  - name: Analytics Platform
+  - name: Model Customization
+  - name: Data Connectors (Notion, Zendesk, Google Drive)
+  - name: Data Export
+- id: mendable-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Sales-led plan with custom message-credit volumes, white-label components,
+    custom and bring-your-own-key models, SSO, custom data connectors, SLA, and
+    premium support. Contact Mendable / Firecrawl sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: 500+ Message Credits per Month
+  - name: White Label Components
+  - name: Custom Fine-Tuning
+  - name: Custom Models
+  - name: Bring Your Own Key
+  - name: SSO
+  - name: Analytics & Data Export
+  - name: Custom Data Connectors
+  - name: SLA & Premium Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

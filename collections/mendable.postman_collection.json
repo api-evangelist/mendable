@@ -1,0 +1,153 @@
+{
+  "info": {
+    "name": "Mendable API",
+    "description": "REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested content (with SSE streaming), ingest and manage data sources, and rate answers. Authenticate with a Mendable api_key supplied in the JSON request body (also accepted as a Bearer token).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mendable.ai/v1"
+    },
+    {
+      "key": "apiKey",
+      "value": "YOUR_MENDABLE_API_KEY"
+    }
+  ],
+  "item": [
+    {
+      "name": "Conversations",
+      "item": [
+        {
+          "name": "New Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/newConversation",
+              "host": ["{{baseUrl}}"],
+              "path": ["newConversation"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\"\n}"
+            },
+            "description": "Creates a new conversation and returns a conversation_id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Mendable Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mendableChat",
+              "host": ["{{baseUrl}}"],
+              "path": ["mendableChat"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\",\n  \"question\": \"How do I get started?\",\n  \"history\": [],\n  \"conversation_id\": 0,\n  \"shouldStream\": false,\n  \"retriever_options\": { \"num_chunks\": 4 }\n}"
+            },
+            "description": "Asks a grounded question over ingested content. Returns an SSE stream by default; set shouldStream to false for a single JSON response with answer, sources, and message_id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ingestion",
+      "item": [
+        {
+          "name": "Ingest Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ingestData",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingestData"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\",\n  \"url\": \"https://docs.example.com\",\n  \"type\": \"website-crawler\",\n  \"include_paths\": [],\n  \"exclude_paths\": []\n}"
+            },
+            "description": "Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube transcript, or single URL. Returns a task_id."
+          }
+        },
+        {
+          "name": "Ingest Documents",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ingestDocuments",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingestDocuments"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\",\n  \"documents\": [\n    { \"content\": \"Document text\", \"metadata\": {} }\n  ]\n}"
+            },
+            "description": "Ingests up to 500 raw documents (2MB per request) with optional metadata. Returns a task_id."
+          }
+        },
+        {
+          "name": "Ingestion Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ingestionStatus",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingestionStatus"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\",\n  \"task_id\": 0\n}"
+            },
+            "description": "Returns the current step, status, and completion metrics for an ingestion task."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ratings",
+      "item": [
+        {
+          "name": "Rate Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rateMessage",
+              "host": ["{{baseUrl}}"],
+              "path": ["rateMessage"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"{{apiKey}}\",\n  \"message_id\": 0,\n  \"rating_value\": 1\n}"
+            },
+            "description": "Submits a positive (1) or negative (-1) rating for an answer message."
+          }
+        }
+      ]
+    }
+  ]
+}

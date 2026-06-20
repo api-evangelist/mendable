@@ -1,0 +1,420 @@
+openapi: 3.0.1
+info:
+  title: Mendable API
+  description: >-
+    REST API for the Mendable AI answers and enterprise search platform. Create
+    conversations, ask grounded questions over ingested documentation and
+    knowledge sources (with Server-Sent Events streaming), ingest and manage
+    data sources, and rate answers. All endpoints authenticate with a Mendable
+    api_key passed in the JSON request body; a Bearer token is also accepted.
+  termsOfService: https://www.mendable.ai/terms
+  contact:
+    name: Mendable Support
+    url: https://docs.mendable.ai
+    email: help@firecrawl.com
+  version: '1.0'
+servers:
+  - url: https://api.mendable.ai/v1
+    description: Mendable production API
+security:
+  - apiKeyBody: []
+  - bearerAuth: []
+tags:
+  - name: Conversations
+    description: Create conversation sessions.
+  - name: Chat
+    description: Ask grounded questions over ingested content.
+  - name: Ingestion
+    description: Ingest and track data sources.
+  - name: Ratings
+    description: Rate answer messages.
+paths:
+  /newConversation:
+    post:
+      operationId: newConversation
+      tags:
+        - Conversations
+      summary: Create a new conversation
+      description: >-
+        Creates a new conversation and returns a conversation_id used to group
+        subsequent chat interactions into a single grounded session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewConversationRequest'
+      responses:
+        '200':
+          description: Conversation created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewConversationResponse'
+        '400':
+          description: Missing or invalid api_key.
+  /mendableChat:
+    post:
+      operationId: mendableChat
+      tags:
+        - Chat
+      summary: Ask a question over ingested content
+      description: >-
+        Sends a question to the Mendable AI assistant grounded in the project's
+        ingested data. By default the response streams as Server-Sent Events;
+        set shouldStream to false to receive a single JSON response with the
+        answer, sources, and message_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MendableChatRequest'
+      responses:
+        '200':
+          description: >-
+            Chat answer. When shouldStream is true (default) the body is a
+            Server-Sent Events stream of source, text, and message_id chunks;
+            when false the body is a single JSON object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MendableChatResponse'
+            text/event-stream:
+              schema:
+                type: string
+                description: >-
+                  SSE stream. Includes a <|source|> chunk with the sources
+                  array, text chunks forming the answer, and a <|message_id|>
+                  chunk with the message identifier.
+        '400':
+          description: Missing or invalid api_key, or missing question.
+  /ingestData:
+    post:
+      operationId: ingestData
+      tags:
+        - Ingestion
+      summary: Ingest a data source by URL
+      description: >-
+        Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube
+        transcript, or single URL into the project. Returns a task_id used to
+        poll ingestion status.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestDataRequest'
+      responses:
+        '200':
+          description: Ingestion started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestTaskResponse'
+        '400':
+          description: Missing or invalid api_key, or missing url.
+  /ingestDocuments:
+    post:
+      operationId: ingestDocuments
+      tags:
+        - Ingestion
+      summary: Ingest raw documents
+      description: >-
+        Ingests up to 500 raw documents (2MB per request) with optional
+        metadata and processing options such as summarization. Returns a
+        task_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestDocumentsRequest'
+      responses:
+        '200':
+          description: Ingestion started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestTaskResponse'
+        '400':
+          description: Missing or invalid api_key, or invalid documents payload.
+  /ingestionStatus:
+    post:
+      operationId: ingestionStatus
+      tags:
+        - Ingestion
+      summary: Check ingestion task status
+      description: >-
+        Returns the current step, status, and completion metrics for an
+        ingestion task identified by task_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestionStatusRequest'
+      responses:
+        '200':
+          description: Current ingestion task status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionStatusResponse'
+        '400':
+          description: Missing or invalid api_key, or missing task_id.
+  /rateMessage:
+    post:
+      operationId: rateMessage
+      tags:
+        - Ratings
+      summary: Rate an answer message
+      description: >-
+        Submits a positive (1) or negative (-1) rating for an individual answer
+        message identified by message_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RateMessageRequest'
+      responses:
+        '200':
+          description: Message rating updated.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Message rating updated
+        '400':
+          description: Missing or invalid api_key, or project not found.
+        '500':
+          description: Server error while updating the rating.
+components:
+  securitySchemes:
+    apiKeyBody:
+      type: apiKey
+      in: query
+      name: api_key
+      description: >-
+        Mendable api_key. Sent as the api_key field inside the JSON request
+        body for every endpoint (modeled here as apiKey for tooling).
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Mendable api_key supplied as a Bearer token in the Authorization header.
+  schemas:
+    NewConversationRequest:
+      type: object
+      required:
+        - api_key
+      properties:
+        api_key:
+          type: string
+          description: Your Mendable API key.
+    NewConversationResponse:
+      type: object
+      properties:
+        conversation_id:
+          type: integer
+          description: Identifier of the newly created conversation.
+    MendableChatRequest:
+      type: object
+      required:
+        - api_key
+        - question
+        - history
+      properties:
+        api_key:
+          type: string
+          description: Your Mendable API key.
+        question:
+          type: string
+          description: The user's question.
+        history:
+          type: array
+          description: >-
+            Prior conversation turns, each with prompt and response strings and
+            optional source objects.
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+        conversation_id:
+          type: number
+          description: Conversation identifier returned from /newConversation.
+        temperature:
+          type: number
+          format: float
+          description: Controls randomness (0.0-1.0).
+        additional_context:
+          type: string
+          description: Extra context appended to the prompt.
+        relevance_threshold:
+          type: number
+          description: Filters out sources scoring below this threshold (0-1).
+        where:
+          type: object
+          additionalProperties: true
+          description: Metadata-based source filtering.
+        retriever_options:
+          type: object
+          description: Retrieval configuration.
+          properties:
+            num_chunks:
+              type: integer
+              description: Number of chunks to retrieve.
+        shouldStream:
+          type: boolean
+          default: true
+          description: Set to false to receive a single JSON response instead of an SSE stream.
+        tracking:
+          type: object
+          additionalProperties: true
+          description: Analytics metadata such as roleInfo for user role tracking.
+    HistoryItem:
+      type: object
+      properties:
+        prompt:
+          type: string
+        response:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    MendableChatResponse:
+      type: object
+      description: Non-streaming chat response (shouldStream=false).
+      properties:
+        answer:
+          type: object
+          properties:
+            text:
+              type: string
+              description: The AI-generated answer.
+        message_id:
+          type: number
+          description: Identifier of the answer message.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        tools_used:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        link:
+          type: string
+        relevance_score:
+          type: number
+    IngestDataRequest:
+      type: object
+      required:
+        - api_key
+        - url
+      properties:
+        api_key:
+          type: string
+          description: Server-side Mendable API key.
+        url:
+          type: string
+          description: Target location for data ingestion.
+        type:
+          type: string
+          description: Ingestion method.
+          default: website-crawler
+          enum:
+            - website-crawler
+            - docusaurus
+            - github
+            - youtube
+            - url
+            - sitemap
+        include_paths:
+          type: array
+          description: Paths to include during a website-crawler crawl.
+          items:
+            type: string
+        exclude_paths:
+          type: array
+          description: Paths to exclude during a website-crawler crawl.
+          items:
+            type: string
+    IngestDocumentsRequest:
+      type: object
+      required:
+        - api_key
+        - documents
+      properties:
+        api_key:
+          type: string
+          description: Server-side Mendable API key.
+        documents:
+          type: array
+          description: Up to 500 raw documents (2MB per request).
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              metadata:
+                type: object
+                additionalProperties: true
+        options:
+          type: object
+          additionalProperties: true
+          description: Processing options such as summarization.
+    IngestTaskResponse:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          description: Identifier used to poll ingestion status.
+    IngestionStatusRequest:
+      type: object
+      required:
+        - api_key
+        - task_id
+      properties:
+        api_key:
+          type: string
+        task_id:
+          type: integer
+    IngestionStatusResponse:
+      type: object
+      properties:
+        step:
+          type: string
+          description: Current ingestion step.
+        status:
+          type: string
+          description: Current task status.
+        completion:
+          type: object
+          additionalProperties: true
+          description: Completion metrics.
+    RateMessageRequest:
+      type: object
+      required:
+        - api_key
+        - message_id
+        - rating_value
+      properties:
+        api_key:
+          type: string
+        message_id:
+          type: integer
+          description: Identifier of the message being rated.
+        rating_value:
+          type: integer
+          description: 1 for positive, -1 for negative.
+          enum:
+            - 1
+            - -1

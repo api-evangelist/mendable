@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mendable API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/newConversation",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\"}"
+            }
+          },
+          "docs": "Creates a new conversation and returns a conversation_id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask a question over ingested content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/mendableChat",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\",\"question\":\"How do I get started?\",\"history\":[],\"shouldStream\":false}"
+            }
+          },
+          "docs": "Asks a grounded question over ingested content. Streams Server-Sent Events by default; set shouldStream to false for a single JSON response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ingest a data source by URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestData",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\",\"url\":\"https://docs.example.com\",\"type\":\"website-crawler\"}"
+            }
+          },
+          "docs": "Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube transcript, or single URL. Returns a task_id."
+        },
+        {
+          "info": {
+            "name": "Ingest raw documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestDocuments",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\",\"documents\":[{\"content\":\"Document text\",\"metadata\":{}}]}"
+            }
+          },
+          "docs": "Ingests up to 500 raw documents (2MB per request). Returns a task_id."
+        },
+        {
+          "info": {
+            "name": "Check ingestion task status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestionStatus",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\",\"task_id\":0}"
+            }
+          },
+          "docs": "Returns the current step, status, and completion metrics for an ingestion task."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ratings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rate an answer message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/rateMessage",
+            "body": {
+              "type": "json",
+              "data": "{\"api_key\":\"{{apiKey}}\",\"message_id\":0,\"rating_value\":1}"
+            }
+          },
+          "docs": "Submits a positive (1) or negative (-1) rating for an answer message."
+        }
+      ]
+    }
+  ]
+}
