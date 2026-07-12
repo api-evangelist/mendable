@@ -102,6 +102,12 @@ apis:
   description: Submit positive or negative ratings on individual answer messages via
     rateMessage to feed answer-quality analytics and improvement loops.
 common:
+- type: TrustCenter
+  url: security/mendable-trust-center.yml
+- type: DomainSecurity
+  url: security/mendable-domain-security.yml
+- type: Authentication
+  url: authentication/mendable-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/mendableai
 - type: LinkedIn
@@ -116,6 +122,8 @@ common:
   url: rate-limits/mendable-rate-limits.yml
 - type: FinOps
   url: finops/mendable-finops.yml
+- url: https://mendable.ai/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

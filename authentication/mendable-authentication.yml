@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mendable-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: apiKeyBody
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: Mendable api_key. Sent as the api_key field inside the JSON request body for
+    every endpoint (modeled here as apiKey for tooling).
+  sources:
+  - openapi/mendable-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Mendable api_key supplied as a Bearer token in the Authorization header.
+  sources:
+  - openapi/mendable-openapi.yml
