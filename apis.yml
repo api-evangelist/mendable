@@ -102,6 +102,8 @@ apis:
   description: Submit positive or negative ratings on individual answer messages via
     rateMessage to feed answer-quality analytics and improvement loops.
 common:
+- type: AgenticAccess
+  url: agentic-access/mendable-agentic-access.yml
 - type: TrustCenter
   url: security/mendable-trust-center.yml
 - type: DomainSecurity
