@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Mendable Chat Conversations API
+  description: REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.
+  termsOfService: https://www.mendable.ai/terms
+  contact:
+    name: Mendable Support
+    url: https://docs.mendable.ai
+    email: help@firecrawl.com
+  version: '1.0'
+servers:
+- url: https://api.mendable.ai/v1
+  description: Mendable production API
+security:
+- apiKeyBody: []
+- bearerAuth: []
+tags:
+- name: Conversations
+  description: Create conversation sessions.
+paths:
+  /newConversation:
+    post:
+      operationId: newConversation
+      tags:
+      - Conversations
+      summary: Create a new conversation
+      description: Creates a new conversation and returns a conversation_id used to group subsequent chat interactions into a single grounded session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewConversationRequest'
+      responses:
+        '200':
+          description: Conversation created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewConversationResponse'
+        '400':
+          description: Missing or invalid api_key.
+components:
+  schemas:
+    NewConversationRequest:
+      type: object
+      required:
+      - api_key
+      properties:
+        api_key:
+          type: string
+          description: Your Mendable API key.
+    NewConversationResponse:
+      type: object
+      properties:
+        conversation_id:
+          type: integer
+          description: Identifier of the newly created conversation.
+  securitySchemes:
+    apiKeyBody:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Mendable api_key. Sent as the api_key field inside the JSON request body for every endpoint (modeled here as apiKey for tooling).
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Mendable api_key supplied as a Bearer token in the Authorization header.

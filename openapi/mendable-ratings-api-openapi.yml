@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: Mendable Chat Ratings API
+  description: REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.
+  termsOfService: https://www.mendable.ai/terms
+  contact:
+    name: Mendable Support
+    url: https://docs.mendable.ai
+    email: help@firecrawl.com
+  version: '1.0'
+servers:
+- url: https://api.mendable.ai/v1
+  description: Mendable production API
+security:
+- apiKeyBody: []
+- bearerAuth: []
+tags:
+- name: Ratings
+  description: Rate answer messages.
+paths:
+  /rateMessage:
+    post:
+      operationId: rateMessage
+      tags:
+      - Ratings
+      summary: Rate an answer message
+      description: Submits a positive (1) or negative (-1) rating for an individual answer message identified by message_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RateMessageRequest'
+      responses:
+        '200':
+          description: Message rating updated.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Message rating updated
+        '400':
+          description: Missing or invalid api_key, or project not found.
+        '500':
+          description: Server error while updating the rating.
+components:
+  schemas:
+    RateMessageRequest:
+      type: object
+      required:
+      - api_key
+      - message_id
+      - rating_value
+      properties:
+        api_key:
+          type: string
+        message_id:
+          type: integer
+          description: Identifier of the message being rated.
+        rating_value:
+          type: integer
+          description: 1 for positive, -1 for negative.
+          enum:
+          - 1
+          - -1
+  securitySchemes:
+    apiKeyBody:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Mendable api_key. Sent as the api_key field inside the JSON request body for every endpoint (modeled here as apiKey for tooling).
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Mendable api_key supplied as a Bearer token in the Authorization header.

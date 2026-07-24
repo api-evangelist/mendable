@@ -1,0 +1,184 @@
+openapi: 3.0.1
+info:
+  title: Mendable Chat Ingestion API
+  description: REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.
+  termsOfService: https://www.mendable.ai/terms
+  contact:
+    name: Mendable Support
+    url: https://docs.mendable.ai
+    email: help@firecrawl.com
+  version: '1.0'
+servers:
+- url: https://api.mendable.ai/v1
+  description: Mendable production API
+security:
+- apiKeyBody: []
+- bearerAuth: []
+tags:
+- name: Ingestion
+  description: Ingest and track data sources.
+paths:
+  /ingestData:
+    post:
+      operationId: ingestData
+      tags:
+      - Ingestion
+      summary: Ingest a data source by URL
+      description: Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube transcript, or single URL into the project. Returns a task_id used to poll ingestion status.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestDataRequest'
+      responses:
+        '200':
+          description: Ingestion started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestTaskResponse'
+        '400':
+          description: Missing or invalid api_key, or missing url.
+  /ingestDocuments:
+    post:
+      operationId: ingestDocuments
+      tags:
+      - Ingestion
+      summary: Ingest raw documents
+      description: Ingests up to 500 raw documents (2MB per request) with optional metadata and processing options such as summarization. Returns a task_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestDocumentsRequest'
+      responses:
+        '200':
+          description: Ingestion started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestTaskResponse'
+        '400':
+          description: Missing or invalid api_key, or invalid documents payload.
+  /ingestionStatus:
+    post:
+      operationId: ingestionStatus
+      tags:
+      - Ingestion
+      summary: Check ingestion task status
+      description: Returns the current step, status, and completion metrics for an ingestion task identified by task_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestionStatusRequest'
+      responses:
+        '200':
+          description: Current ingestion task status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionStatusResponse'
+        '400':
+          description: Missing or invalid api_key, or missing task_id.
+components:
+  schemas:
+    IngestDocumentsRequest:
+      type: object
+      required:
+      - api_key
+      - documents
+      properties:
+        api_key:
+          type: string
+          description: Server-side Mendable API key.
+        documents:
+          type: array
+          description: Up to 500 raw documents (2MB per request).
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              metadata:
+                type: object
+                additionalProperties: true
+        options:
+          type: object
+          additionalProperties: true
+          description: Processing options such as summarization.
+    IngestionStatusResponse:
+      type: object
+      properties:
+        step:
+          type: string
+          description: Current ingestion step.
+        status:
+          type: string
+          description: Current task status.
+        completion:
+          type: object
+          additionalProperties: true
+          description: Completion metrics.
+    IngestDataRequest:
+      type: object
+      required:
+      - api_key
+      - url
+      properties:
+        api_key:
+          type: string
+          description: Server-side Mendable API key.
+        url:
+          type: string
+          description: Target location for data ingestion.
+        type:
+          type: string
+          description: Ingestion method.
+          default: website-crawler
+          enum:
+          - website-crawler
+          - docusaurus
+          - github
+          - youtube
+          - url
+          - sitemap
+        include_paths:
+          type: array
+          description: Paths to include during a website-crawler crawl.
+          items:
+            type: string
+        exclude_paths:
+          type: array
+          description: Paths to exclude during a website-crawler crawl.
+          items:
+            type: string
+    IngestionStatusRequest:
+      type: object
+      required:
+      - api_key
+      - task_id
+      properties:
+        api_key:
+          type: string
+        task_id:
+          type: integer
+    IngestTaskResponse:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          description: Identifier used to poll ingestion status.
+  securitySchemes:
+    apiKeyBody:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Mendable api_key. Sent as the api_key field inside the JSON request body for every endpoint (modeled here as apiKey for tooling).
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Mendable api_key supplied as a Bearer token in the Authorization header.
