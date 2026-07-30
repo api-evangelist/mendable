@@ -8,7 +8,20 @@ description: Mendable is an AI answers and enterprise search platform that lets 
   a REST API at https://api.mendable.ai/v1 for creating conversations, asking
   questions over ingested content with streaming, ingesting and managing data
   sources, and rating answers.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mendable.png
 tags:
 - AI
 - Answers
@@ -19,88 +32,94 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: mendable:mendable-chat-answers-api
-  name: Mendable Chat & Answers API
-  tags:
-  - Chat
-  - Answers
-  - RAG
-  - Streaming
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: mendable:mendable-chat-api
+  name: Mendable Chat API
+  description: Ask grounded questions over ingested content.
   humanURL: https://docs.mendable.ai/mendable-api/chat
   baseURL: https://api.mendable.ai/v1
+  tags:
+  - Chat
   properties:
-  - url: https://docs.mendable.ai/mendable-api/chat
-    type: Documentation
-  - url: https://docs.mendable.ai/mendable-api/overview
-    type: APIReference
-  - url: openapi/mendable-openapi.yml
-    type: OpenAPI
-  - url: collections/mendable.postman_collection.json
-    type: PostmanCollection
-  description: Ask natural-language questions over ingested documentation and knowledge
-    sources via the mendableChat endpoint, returning grounded answers with citations.
-    Supports Server-Sent Events streaming, conversation history, retriever options,
-    metadata filtering, and tool calls.
+  - type: OpenAPI
+    url: openapi/mendable-chat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/chat
+  - type: APIReference
+    url: https://docs.mendable.ai/mendable-api/overview
+  - type: PostmanCollection
+    url: collections/mendable.postman_collection.json
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/conversation
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/ingestion
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/rating
 - aid: mendable:mendable-conversations-api
   name: Mendable Conversations API
+  description: Create conversation sessions.
+  humanURL: https://docs.mendable.ai/mendable-api/chat
+  baseURL: https://api.mendable.ai/v1
   tags:
   - Conversations
-  - Sessions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.mendable.ai/mendable-api/conversation
-  baseURL: https://api.mendable.ai/v1
   properties:
-  - url: https://docs.mendable.ai/mendable-api/conversation
-    type: Documentation
-  - url: https://docs.mendable.ai/mendable-api/overview
-    type: APIReference
-  - url: openapi/mendable-openapi.yml
-    type: OpenAPI
-  - url: collections/mendable.postman_collection.json
-    type: PostmanCollection
-  description: Create a new conversation to obtain a conversation_id used to group a
-    series of chat interactions into a single grounded session.
-- aid: mendable:mendable-data-ingestion-api
-  name: Mendable Data Ingestion & Sources API
+  - type: OpenAPI
+    url: openapi/mendable-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/chat
+  - type: APIReference
+    url: https://docs.mendable.ai/mendable-api/overview
+  - type: PostmanCollection
+    url: collections/mendable.postman_collection.json
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/conversation
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/ingestion
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/rating
+- aid: mendable:mendable-ingestion-api
+  name: Mendable Ingestion API
+  description: Ingest and track data sources.
+  humanURL: https://docs.mendable.ai/mendable-api/chat
+  baseURL: https://api.mendable.ai/v1
   tags:
-  - Data Ingestion
-  - Sources
-  - Indexing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.mendable.ai/mendable-api/ingestion
-  baseURL: https://api.mendable.ai/v1
+  - Ingestion
   properties:
-  - url: https://docs.mendable.ai/mendable-api/ingestion
-    type: Documentation
-  - url: https://docs.mendable.ai/mendable-api/overview
-    type: APIReference
-  - url: openapi/mendable-openapi.yml
-    type: OpenAPI
-  - url: collections/mendable.postman_collection.json
-    type: PostmanCollection
-  description: Ingest websites, sitemaps, GitHub repos, Docusaurus sites, YouTube
-    transcripts, single URLs, and raw documents into a Mendable project, and poll
-    ingestion task status. Returns a task_id used to track indexing progress.
+  - type: OpenAPI
+    url: openapi/mendable-ingestion-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/chat
+  - type: APIReference
+    url: https://docs.mendable.ai/mendable-api/overview
+  - type: PostmanCollection
+    url: collections/mendable.postman_collection.json
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/conversation
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/ingestion
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/rating
 - aid: mendable:mendable-ratings-api
   name: Mendable Ratings API
+  description: Rate answer messages.
+  humanURL: https://docs.mendable.ai/mendable-api/chat
+  baseURL: https://api.mendable.ai/v1
   tags:
   - Ratings
-  - Feedback
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.mendable.ai/mendable-api/rating
-  baseURL: https://api.mendable.ai/v1
   properties:
-  - url: https://docs.mendable.ai/mendable-api/rating
-    type: Documentation
-  - url: https://docs.mendable.ai/mendable-api/overview
-    type: APIReference
-  - url: openapi/mendable-openapi.yml
-    type: OpenAPI
-  - url: collections/mendable.postman_collection.json
-    type: PostmanCollection
-  description: Submit positive or negative ratings on individual answer messages via
-    rateMessage to feed answer-quality analytics and improvement loops.
+  - type: OpenAPI
+    url: openapi/mendable-ratings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/chat
+  - type: APIReference
+    url: https://docs.mendable.ai/mendable-api/overview
+  - type: PostmanCollection
+    url: collections/mendable.postman_collection.json
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/conversation
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/ingestion
+  - type: Documentation
+    url: https://docs.mendable.ai/mendable-api/rating
 common:
 - type: AgenticAccess
   url: agentic-access/mendable-agentic-access.yml
