@@ -1,0 +1,463 @@
+{
+  "item": [
+    {
+      "id": "2868d344-bb55-412e-b693-c3a4c790d0b0",
+      "name": "Ingestion",
+      "description": {
+        "content": "Ingest and track data sources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5e2dd3b-7235-4188-bf49-fe69b2ce647d",
+          "name": "Ingest a data source by URL",
+          "request": {
+            "name": "Ingest a data source by URL",
+            "description": {
+              "content": "Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube transcript, or single URL into the project. Returns a task_id used to poll ingestion status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"url\": \"<string>\",\n  \"type\": \"website-crawler\",\n  \"include_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81c875a2-b678-4706-9ad2-80a4700fd8b6",
+              "name": "Ingestion started.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"url\": \"<string>\",\n  \"type\": \"website-crawler\",\n  \"include_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": 4592\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cd14792-af8b-4d63-a902-b16ad10a3b07",
+              "name": "Missing or invalid api_key, or missing url.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"url\": \"<string>\",\n  \"type\": \"website-crawler\",\n  \"include_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "535bc9e6-fdff-4953-a2ca-8d52a63b4ffa",
+          "name": "Ingest raw documents",
+          "request": {
+            "name": "Ingest raw documents",
+            "description": {
+              "content": "Ingests up to 500 raw documents (2MB per request) with optional metadata and processing options such as summarization. Returns a task_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestDocuments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"documents\": [\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": 1642.656681534288\n      }\n    }\n  ],\n  \"options\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e397e651-dd44-42b4-9b4c-3e675855a386",
+              "name": "Ingestion started.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestDocuments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"documents\": [\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": \"string\",\n        \"key_3\": 1131\n      }\n    },\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": 2791,\n        \"key_3\": true,\n        \"key_4\": 155\n      }\n    }\n  ],\n  \"options\": {\n    \"key_0\": false,\n    \"key_1\": \"string\",\n    \"key_2\": 3339.7597067457473\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": 4592\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a8cb6a2-1cdf-463d-b79b-b32cfd921a5c",
+              "name": "Missing or invalid api_key, or invalid documents payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestDocuments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"documents\": [\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": \"string\",\n        \"key_3\": 1131\n      }\n    },\n    {\n      \"content\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": 2791,\n        \"key_3\": true,\n        \"key_4\": 155\n      }\n    }\n  ],\n  \"options\": {\n    \"key_0\": false,\n    \"key_1\": \"string\",\n    \"key_2\": 3339.7597067457473\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bf634c7-0806-4e2c-b71c-e3474f8917a0",
+          "name": "Check ingestion task status",
+          "request": {
+            "name": "Check ingestion task status",
+            "description": {
+              "content": "Returns the current step, status, and completion metrics for an ingestion task identified by task_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestionStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"task_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b4e7b98-1c35-42cb-8a0b-35d669e3624e",
+              "name": "Current ingestion task status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestionStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"task_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"step\": \"string\",\n  \"status\": \"string\",\n  \"completion\": {\n    \"key_0\": 6228\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22d9113e-1b21-48cf-9e2c-cd1dc1ad5c06",
+              "name": "Missing or invalid api_key, or missing task_id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestionStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"task_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mendable.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8b627504-9c7e-4682-8a92-1c862e96feb1",
+    "name": "Mendable Chat Ingestion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.\n\nContact Support:\n Name: Mendable Support\n Email: help@firecrawl.com",
+      "type": "text/plain"
+    }
+  }
+}

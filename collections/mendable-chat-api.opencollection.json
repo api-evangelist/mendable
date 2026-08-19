@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mendable Chat API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask a question over ingested content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/mendableChat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a question to the Mendable AI assistant grounded in the project's ingested data. By default the response streams as Server-Sent Events; set shouldStream to false to receive a single JSON response with the answer, sources, and message_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

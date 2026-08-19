@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "e3754519-271c-4a7e-860d-9097352b8766",
+      "name": "Ratings",
+      "description": {
+        "content": "Rate answer messages.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "344870a6-dc36-4b44-bf2d-7c2b149f6803",
+          "name": "Rate an answer message",
+          "request": {
+            "name": "Rate an answer message",
+            "description": {
+              "content": "Submits a positive (1) or negative (-1) rating for an individual answer message identified by message_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rateMessage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"message_id\": \"<integer>\",\n  \"rating_value\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ade1f9a-8b0a-493d-822a-71e023898633",
+              "name": "Message rating updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rateMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"message_id\": \"<integer>\",\n  \"rating_value\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Message rating updated",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "991a6c11-12a6-490d-8c0f-98da9727ccf5",
+              "name": "Missing or invalid api_key, or project not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rateMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"message_id\": \"<integer>\",\n  \"rating_value\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "334551fa-5962-41ae-a0ff-cf88504f5f85",
+              "name": "Server error while updating the rating.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rateMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"message_id\": \"<integer>\",\n  \"rating_value\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mendable.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "83bf0311-56df-4871-92cb-cafdb9cfffe5",
+    "name": "Mendable Chat Ratings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.\n\nContact Support:\n Name: Mendable Support\n Email: help@firecrawl.com",
+      "type": "text/plain"
+    }
+  }
+}

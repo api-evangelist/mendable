@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mendable Chat Ingestion API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ingest a data source by URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestData",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ingests a website, sitemap, GitHub repo, Docusaurus site, YouTube transcript, or single URL into the project. Returns a task_id used to poll ingestion status."
+        },
+        {
+          "info": {
+            "name": "Ingest raw documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestDocuments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ingests up to 500 raw documents (2MB per request) with optional metadata and processing options such as summarization. Returns a task_id."
+        },
+        {
+          "info": {
+            "name": "Check ingestion task status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/ingestionStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the current step, status, and completion metrics for an ingestion task identified by task_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

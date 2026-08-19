@@ -1,0 +1,187 @@
+{
+  "item": [
+    {
+      "id": "05896257-8e0a-459c-b14c-4ff83be76b2b",
+      "name": "Chat",
+      "description": {
+        "content": "Ask grounded questions over ingested content.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24816d69-4c7f-449d-955e-9ba8fce5c228",
+          "name": "Ask a question over ingested content",
+          "request": {
+            "name": "Ask a question over ingested content",
+            "description": {
+              "content": "Sends a question to the Mendable AI assistant grounded in the project's ingested data. By default the response streams as Server-Sent Events; set shouldStream to false to receive a single JSON response with the answer, sources, and message_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mendableChat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"question\": \"<string>\",\n  \"history\": [\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"conversation_id\": \"<number>\",\n  \"temperature\": \"<float>\",\n  \"additional_context\": \"<string>\",\n  \"relevance_threshold\": \"<number>\",\n  \"where\": {\n    \"key_0\": \"string\"\n  },\n  \"retriever_options\": {\n    \"num_chunks\": \"<integer>\"\n  },\n  \"shouldStream\": true,\n  \"tracking\": {\n    \"key_0\": 6065,\n    \"key_1\": 1960\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1062a09c-ef5f-40ea-827d-3bf9de41e36d",
+              "name": "Chat answer. When shouldStream is true (default) the body is a Server-Sent Events stream of source, text, and message_id chunks; when false the body is a single JSON object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mendableChat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"question\": \"<string>\",\n  \"history\": [\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"conversation_id\": \"<number>\",\n  \"temperature\": \"<float>\",\n  \"additional_context\": \"<string>\",\n  \"relevance_threshold\": \"<number>\",\n  \"where\": {\n    \"key_0\": 8172,\n    \"key_1\": 4813\n  },\n  \"retriever_options\": {\n    \"num_chunks\": \"<integer>\"\n  },\n  \"shouldStream\": true,\n  \"tracking\": {\n    \"key_0\": 7107.6068517856,\n    \"key_1\": true,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": {\n    \"text\": \"string\"\n  },\n  \"message_id\": 4790.670992407696,\n  \"sources\": [\n    {\n      \"id\": \"<string>\",\n      \"content\": \"<string>\",\n      \"link\": \"<string>\",\n      \"relevance_score\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"content\": \"<string>\",\n      \"link\": \"<string>\",\n      \"relevance_score\": \"<number>\"\n    }\n  ],\n  \"tools_used\": [\n    {\n      \"key_0\": 1211.8543508079083,\n      \"key_1\": 5123,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": 3334.3258449012415,\n      \"key_1\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e94755a8-1572-492e-9db1-580edd52a93c",
+              "name": "Missing or invalid api_key, or missing question.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mendableChat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"question\": \"<string>\",\n  \"history\": [\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"prompt\": \"<string>\",\n      \"response\": \"<string>\",\n      \"sources\": [\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"content\": \"<string>\",\n          \"link\": \"<string>\",\n          \"relevance_score\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"conversation_id\": \"<number>\",\n  \"temperature\": \"<float>\",\n  \"additional_context\": \"<string>\",\n  \"relevance_threshold\": \"<number>\",\n  \"where\": {\n    \"key_0\": 8172,\n    \"key_1\": 4813\n  },\n  \"retriever_options\": {\n    \"num_chunks\": \"<integer>\"\n  },\n  \"shouldStream\": true,\n  \"tracking\": {\n    \"key_0\": 7107.6068517856,\n    \"key_1\": true,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mendable.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c25ee1e3-adf6-4f73-8033-81248ff1ed5d",
+    "name": "Mendable Chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.\n\nContact Support:\n Name: Mendable Support\n Email: help@firecrawl.com",
+      "type": "text/plain"
+    }
+  }
+}

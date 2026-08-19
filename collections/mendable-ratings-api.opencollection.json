@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mendable Chat Ratings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ratings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rate an answer message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mendable.ai/v1/rateMessage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a positive (1) or negative (-1) rating for an individual answer message identified by message_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
