@@ -23,6 +23,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mendable.png
 tags:
+- Artificial Intelligence
+- Answers
+- Enterprise Search
+- RAG
+- Support
+tags_raw:
 - AI
 - Answers
 - Enterprise Search
