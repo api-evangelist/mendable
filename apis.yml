@@ -8,6 +8,18 @@ description: Mendable is an AI answers and enterprise search platform that lets 
   a REST API at https://api.mendable.ai/v1 for creating conversations, asking
   questions over ingested content with streaming, ingesting and managing data
   sources, and rating answers.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
