@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mendable Chat Ratings API
+  title: Mendable Ratings API
   description: REST API for the Mendable AI answers and enterprise search platform. Create conversations, ask grounded questions over ingested documentation and knowledge sources (with Server-Sent Events streaming), ingest and manage data sources, and rate answers. All endpoints authenticate with a Mendable api_key passed in the JSON request body; a Bearer token is also accepted.
   termsOfService: https://www.mendable.ai/terms
   contact:
