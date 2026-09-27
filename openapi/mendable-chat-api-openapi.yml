@@ -68,6 +68,17 @@ components:
           items:
             type: object
             additionalProperties: true
+    HistoryItem:
+      type: object
+      properties:
+        prompt:
+          type: string
+        response:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
     MendableChatRequest:
       type: object
       required:
@@ -129,17 +140,6 @@ components:
           type: string
         relevance_score:
           type: number
-    HistoryItem:
-      type: object
-      properties:
-        prompt:
-          type: string
-        response:
-          type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Source'
   securitySchemes:
     apiKeyBody:
       type: apiKey
