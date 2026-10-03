@@ -86,6 +86,49 @@ paths:
           description: Missing or invalid api_key, or missing task_id.
 components:
   schemas:
+    IngestDocumentsRequest:
+      type: object
+      required:
+      - api_key
+      - documents
+      properties:
+        api_key:
+          type: string
+          description: Server-side Mendable API key.
+        documents:
+          type: array
+          description: Up to 500 raw documents (2MB per request).
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              metadata:
+                type: object
+                additionalProperties: true
+        options:
+          type: object
+          additionalProperties: true
+          description: Processing options such as summarization.
+    IngestTaskResponse:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          description: Identifier used to poll ingestion status.
+    IngestionStatusResponse:
+      type: object
+      properties:
+        step:
+          type: string
+          description: Current ingestion step.
+        status:
+          type: string
+          description: Current task status.
+        completion:
+          type: object
+          additionalProperties: true
+          description: Completion metrics.
     IngestionStatusRequest:
       type: object
       required:
@@ -96,12 +139,6 @@ components:
           type: string
         task_id:
           type: integer
-    IngestTaskResponse:
-      type: object
-      properties:
-        task_id:
-          type: integer
-          description: Identifier used to poll ingestion status.
     IngestDataRequest:
       type: object
       required:
@@ -135,43 +172,6 @@ components:
           description: Paths to exclude during a website-crawler crawl.
           items:
             type: string
-    IngestionStatusResponse:
-      type: object
-      properties:
-        step:
-          type: string
-          description: Current ingestion step.
-        status:
-          type: string
-          description: Current task status.
-        completion:
-          type: object
-          additionalProperties: true
-          description: Completion metrics.
-    IngestDocumentsRequest:
-      type: object
-      required:
-      - api_key
-      - documents
-      properties:
-        api_key:
-          type: string
-          description: Server-side Mendable API key.
-        documents:
-          type: array
-          description: Up to 500 raw documents (2MB per request).
-          items:
-            type: object
-            properties:
-              content:
-                type: string
-              metadata:
-                type: object
-                additionalProperties: true
-        options:
-          type: object
-          additionalProperties: true
-          description: Processing options such as summarization.
   securitySchemes:
     apiKeyBody:
       type: apiKey

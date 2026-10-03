@@ -68,6 +68,17 @@ components:
           items:
             type: object
             additionalProperties: true
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        link:
+          type: string
+        relevance_score:
+          type: number
     HistoryItem:
       type: object
       properties:
@@ -129,17 +140,6 @@ components:
           type: object
           additionalProperties: true
           description: Analytics metadata such as roleInfo for user role tracking.
-    Source:
-      type: object
-      properties:
-        id:
-          type: string
-        content:
-          type: string
-        link:
-          type: string
-        relevance_score:
-          type: number
   securitySchemes:
     apiKeyBody:
       type: apiKey
