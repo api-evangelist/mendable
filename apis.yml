@@ -139,6 +139,8 @@ apis:
   - type: Documentation
     url: https://docs.mendable.ai/mendable-api/rating
 common:
+- type: Pricing
+  url: https://www.mendable.ai/pricing
 - type: AgenticAccess
   url: agentic-access/mendable-agentic-access.yml
 - type: TrustCenter
