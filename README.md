@@ -1,4 +1,4 @@
-# Mendable (mendable)
+# Mendable
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,117 +66,124 @@
 
 Mendable is an AI answers and enterprise search platform that lets teams ingest their documentation, websites, and knowledge sources and serve grounded, cited AI chat answers over them. Built by the Firecrawl / Mendable team, it exposes a REST API at https://api.mendable.ai/v1 for creating conversations, asking questions over ingested content with streaming, ingesting and managing data sources, and rating answers.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mendable/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mendable/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Answers · Enterprise Search · RAG · Support
 
-## Tags
+## Mendable on APIs.io
 
-- AI
-- Answers
-- Enterprise Search
-- RAG
-- Support
+Everything profiled for Mendable is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mendable/](https://apis.io/providers/mendable/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Mendable Chat API](https://apis.io/apis/mendable/mendable-chat-api/) — Ask grounded questions over ingested content.
+- [Mendable Conversations API](https://apis.io/apis/mendable/mendable-conversations-api/) — Create conversation sessions.
+- [Mendable Ingestion API](https://apis.io/apis/mendable/mendable-ingestion-api/) — Ingest and track data sources.
+- [Mendable Ratings API](https://apis.io/apis/mendable/mendable-ratings-api/) — Rate answer messages.
 
-## APIs
+### Published properties
 
-### Mendable Chat & Answers API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Ask natural-language questions over ingested documentation and knowledge sources via the mendableChat endpoint, returning grounded answers with citations. Supports Server-Sent Events streaming, conversation history, retriever options, metadata filtering, and tool calls.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.mendable.ai/mendable-api/chat](https://docs.mendable.ai/mendable-api/chat)
-- **Base URL:** `https://api.mendable.ai/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Mendable Agentic Access](https://apis.io/agentic-access/mendable/mendable-agentic-access/)
 
-- Chat
-- Answers
-- RAG
-- Streaming
+#### Collections (5)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.mendable.ai/mendable-api/chat)
-- [API Reference](https://docs.mendable.ai/mendable-api/overview)
-- [OpenAPI](openapi/mendable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mendable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mendable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Mendable API](https://apis.io/collections/mendable/open-mendable/)
+- [Mendable Chat API](https://apis.io/collections/mendable/open-mendable-chat-api/)
+- [Mendable Chat Conversations API](https://apis.io/collections/mendable/open-mendable-conversations-api/)
+- [Mendable Chat Ingestion API](https://apis.io/collections/mendable/open-mendable-ingestion-api/)
+- [Mendable Chat Ratings API](https://apis.io/collections/mendable/open-mendable-ratings-api/)
 
-### Mendable Conversations API
+#### Security (3)
 
-Create a new conversation to obtain a conversation_id used to group a series of chat interactions into a single grounded session.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.mendable.ai/mendable-api/conversation](https://docs.mendable.ai/mendable-api/conversation)
-- **Base URL:** `https://api.mendable.ai/v1`
+- [Mendable Authentication](https://apis.io/security/mendable/mendable-authentication/)
+- [Mendable Domain Security](https://apis.io/security/mendable/mendable-domain-security/)
+- [Mendable Trust Center](https://apis.io/security/mendable/mendable-trust-center/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Conversations
-- Sessions
+Published plans, tiers and prices.
 
-#### Properties
+- [Mendable Plans Pricing](https://apis.io/plans/mendable/mendable-plans-pricing/)
 
-- [Documentation](https://docs.mendable.ai/mendable-api/conversation)
-- [API Reference](https://docs.mendable.ai/mendable-api/overview)
-- [OpenAPI](openapi/mendable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mendable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mendable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Mendable Data Ingestion & Sources API
+Published request limits.
 
-Ingest websites, sitemaps, GitHub repos, Docusaurus sites, YouTube transcripts, single URLs, and raw documents into a Mendable project, and poll ingestion task status. Returns a task_id used to track indexing progress.
+- [Mendable Rate Limits](https://apis.io/rate-limits/mendable/mendable-rate-limits/)
 
-- **Human URL:** [https://docs.mendable.ai/mendable-api/ingestion](https://docs.mendable.ai/mendable-api/ingestion)
-- **Base URL:** `https://api.mendable.ai/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Data Ingestion
-- Sources
-- Indexing
+- [Mendable Finops](https://apis.io/finops/mendable/mendable-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.mendable.ai/mendable-api/ingestion)
-- [API Reference](https://docs.mendable.ai/mendable-api/overview)
-- [OpenAPI](openapi/mendable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mendable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mendable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Mendable Ratings API
-
-Submit positive or negative ratings on individual answer messages via rateMessage to feed answer-quality analytics and improvement loops.
-
-- **Human URL:** [https://docs.mendable.ai/mendable-api/rating](https://docs.mendable.ai/mendable-api/rating)
-- **Base URL:** `https://api.mendable.ai/v1`
-
-#### Tags
-
-- Ratings
-- Feedback
-
-#### Properties
-
-- [Documentation](https://docs.mendable.ai/mendable-api/rating)
-- [API Reference](https://docs.mendable.ai/mendable-api/overview)
-- [OpenAPI](openapi/mendable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mendable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mendable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/mendableai)
-- [LinkedIn](https://www.linkedin.com/company/mendable)
 - [Website](https://www.mendable.ai)
 - [Documentation](https://docs.mendable.ai)
-- [Plans](plans/mendable-plans-pricing.yml)
-- [Rate Limits](rate-limits/mendable-rate-limits.yml)
-- [Fin Ops](finops/mendable-finops.yml)
+- [Pricing](https://www.mendable.ai/pricing)
+- [Blog](https://mendable.ai/blog)
+- [GitHub](https://github.com/mendableai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 34.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 49.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 39.5 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mendable/](https://apis.io/providers/mendable/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mendable: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mendable/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
